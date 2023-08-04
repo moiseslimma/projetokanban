@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Inspiration&family=Montserrat:wght@300;400;600;700&family=Open+Sans:ital@0;1&family=Permanent+Marker&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.section {
+    border: 5px solid #000;
+    background-color: #d0d0d0;
+    height: 100vh;
+    overflow-y: auto;
+}
+.divmaior {
+    display: grid;
+    grid-template-columns: repeat(3, 400px);
+    gap: 50px;
+    justify-content: center;
+    text-align: center;
+    font-family: Permanent Marker;
+    font-size: 20px;
+    padding: 50px;
+}
+
+
+.sidetodo h3{
+    color: red;
+}
+
+.doingDivFather {
+    display: none;
+}
+.doneDivFather {
+    display: none;
+}
+
+.sidedoing h3{
+    color: yellow;
+}
+
+.sidedone h3{
+    color: green;
+}
+.ajeitandoomais{
+    display: flex;
+    justify-content: flex-start;
+    position: absolute;
+}
+svg {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* cartao e icones no para fazer */
+
+.sidetodo .card-and-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.sidedoing .card-and-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.sidedone .card-and-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+
+
+.sidetodo .card {
+    background: lightcoral;
+    width: 270px;
+    height: 150px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.sidedoing .card {
+    background: yellow;
+    width: 250px;
+    height: 150px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.sidedone .card {
+    background: darkseagreen;
+    width: 250px;
+    height: 150px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.sidetodo .card-and-bar .card .textarea {
+    background-color: lightcoral;
+    border: none;
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+}
+.sidedoing .card-and-bar .card .textarea2 {
+    background-color: yellow;
+    border: none;
+    outline: none;
+    text-align: center;
+}
+.sidedone .card-and-bar .card .textarea3 {
+    background-color: darkseagreen;
+    border: none;
+    outline: none;
+    text-align: center;
+}
+
+.bar-icons {
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+}
+
+/*cartao para adicionar */
+.nextcard{
+    background-color: lightcoral;
+    position: fixed;
+    width: 600px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    box-shadow: 0px 3px 5px 1px #000;
+    z-index: 10;
+}
+.nextcard .campoInput {
+    display: flex;
+    margin-top: 20px;  
+}
+.nextcard .inputvalor {
+    background-color: lightcoral;
+    border: none;
+    border-bottom: 1px solid #000;
+    width: 90%;
+    outline: none;
+    margin: auto;
+}
+.botoes {
+    display: flex;
+    background: none;
+    justify-content: flex-end;
+    margin-top: 55px;
+}
+.buttonn {
+    background-color: lightcoral;
+    margin-right: 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+/*editar*/
+.edit {
+    position: fixed;
+    width: 600px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 10;
+}
+
+/*setas*/
+.sidetodo .bi-arrow-right:hover {
+    color: yellow;
+}
+.doingArrow .bi-arrow-left:hover{
+    color: lightcoral;
+}
+.doingArrow .bi-arrow-right:hover{
+    color: darkseagreen;
+}
+.doneArrow:hover {
+    color: yellow;
+}
+
+/* escurecer a tela */
+.fade {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 5;
+    display: none;
+}
+
+

@@ -7,11 +7,11 @@
 
 .section {
     border: 5px solid #000;
-    background-color: #d0d0d0;
+    background-color: #c0c0c0;
     height: 100vh;
     overflow-y: auto;
 }
-.divmaior {
+.globalDiv {
     display: grid;
     grid-template-columns: repeat(3, 400px);
     gap: 50px;
@@ -41,7 +41,7 @@
 .sidedone h3{
     color: green;
 }
-.ajeitandoomais{
+.addButton {
     display: flex;
     justify-content: flex-start;
     position: absolute;
@@ -134,9 +134,9 @@ svg {
 
 /*cartao para adicionar */
 .nextcard{
-    background-color: lightcoral;
+    background-color: #f0f0f0;
     position: fixed;
-    width: 600px;
+    width: 500px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -149,7 +149,7 @@ svg {
     margin-top: 20px;  
 }
 .nextcard .inputvalor {
-    background-color: lightcoral;
+    background-color: #f0f0f0;
     border: none;
     border-bottom: 1px solid #000;
     width: 90%;
@@ -163,7 +163,7 @@ svg {
     margin-top: 55px;
 }
 .buttonn {
-    background-color: lightcoral;
+    background-color: #f0f0f0;
     margin-right: 20px;
     border: none;
     cursor: pointer;
@@ -174,7 +174,7 @@ svg {
 /*editar*/
 .edit {
     position: fixed;
-    width: 600px;
+    width: 500px;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -196,16 +196,5 @@ svg {
     color: yellow;
 }
 
-/* escurecer a tela */
-.fade {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 5;
-    display: none;
-}
 
 

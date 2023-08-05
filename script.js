@@ -49,16 +49,16 @@ let textToMove;
 let sideDivFather;
 
 
-let podeounao = true
+let canAddButton = true
 
 firstTodo.addEventListener("click", () => {
   if (firstTodo.innerText === "Clique aqui para começar") {
-    podeounao = true
     actionFirstCard.style.display = "block";
     input.focus();
     section.style.opacity = "0.5";
+    canAddButton = true;
   } else {
-    podeounao = false
+    canAddButton = false;
   }
   
 });

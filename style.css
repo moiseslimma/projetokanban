@@ -22,7 +22,6 @@
     padding: 50px;
 }
 
-
 .sidetodo h3{
     color: red;
 }
@@ -51,7 +50,6 @@ svg {
     cursor: pointer;
 }
 
-/* cartao e icones no para fazer */
 
 .sidetodo .card-and-bar {
     display: flex;

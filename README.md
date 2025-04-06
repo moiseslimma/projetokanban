@@ -1,31 +1,255 @@
-# 📝 Quadro Kanban Interativo
+const card = document.querySelector(".card")
+const spaceToCard= document.querySelector('.sidetodo .divFather')
 
-Este é um **Quadro Kanban** simples e interativo, ideal para gerenciar tarefas de forma organizada e visual. Com ele, você pode adicionar, editar, mover e excluir tarefas nas três colunas principais: **Para Fazer**, **Fazendo** e **Feito**. O projeto foi desenvolvido com HTML, CSS e JavaScript puro.
+const nextCard = document.querySelector('.nextcard')
+const prepareNextCard = document.querySelector(".prepareNextCard");
+const prepareInputValue = document.querySelector(".prepareInputValue");
+const input = document.querySelector('.inputvalor')
+const firstTodo = document.querySelector('.textarea')
+const firstDoing = document.querySelector(".textarea2");
+const firstDone = document.querySelector(".textarea3");
 
-## Funcionalidades 🚀
 
-- **Adicionar Tarefas**: Crie novas tarefas clicando no botão "Clique aqui para começar" ou no botão de adicionar card.
-- **Editar Tarefas** ✏️: Clique no ícone de lápis para editar uma tarefa.
-- **Mover Tarefas** 🔄: Use as setas para mover as tarefas entre as colunas:
-  - **Para Fazer** ➡️ **Fazendo**
-  - **Fazendo** ➡️ **Feito**
-  - **Feito** ➡️ **Fazendo**
-  - **Fazendo** ➡️ **Para Fazer**
-  - **Subir Tarefas** ⬆️: Dentro de cada coluna, você pode **subir** tarefas clicando na seta para cima (ícone de seta para cima). Isso move a tarefa para o topo da lista na respectiva coluna, permitindo que você reordene suas tarefas com facilidade.
-- **Excluir Tarefas** 🗑️: Clique no ícone de lixo para excluir uma tarefa.
+const cardAndBar = document.querySelector('.card-and-bar')
+const doingCarAndBar = document.querySelector('.doingCarAndBar');
+const toDoCarAndBar = document.querySelector(".toDoCarAndBar");
+const doneCarAndBar = document.querySelector(".doneCarAndBar");
 
-## Tecnologias Utilizadas 🖥️
 
-- **HTML**: Estrutura do conteúdo do quadro.
-- **CSS**: Estilização e responsividade.
-- **JavaScript**: Lógica para interatividade, como adicionar, editar, mover e excluir tarefas.
+const toDoDivFather = document.querySelector(".toDoDivFather");
+const doingDivFather = document.querySelector(".doingDivFather");
+const doneDivFather = document.querySelector(".doneDivFather");
 
-## Como Usar 🔧
 
-1. **Abrir o Projeto**: Abra o arquivo `index.html` em seu navegador.
-2. **Adicionar uma Tarefa**: Clique na área de tarefas em "Clique aqui para começar" e comece a digitar o nome da tarefa.
-3. **Editar uma Tarefa**: Clique no ícone de lápis ao lado de uma tarefa para editá-la.
-4. **Mover Tarefas**: Use as setas nas tarefas para movê-las entre as colunas (Para Fazer, Fazendo, Feito).
-5. **Excluir Tarefa**: Clique no ícone de lixo para remover uma tarefa.
+const section = document.querySelector('.section')
+const edit = document.querySelector('.edit')
+
+const addcard = document.querySelector('.addButton')
+const editConfirm = document.querySelector('.editar')
+const cancel = document.querySelector('.cancel')
+const editCancel = document.querySelector('.editCancel')
+const confirm = document.querySelector('.confirm')
+
+
+const sideToDoArrow = document.querySelector('.sideToDoArrow')
+const sideDoingLeftArrow = document.querySelector(".sideDoingLeftArrow");
+const sideDoingRighttArrow = document.querySelector(".sideDoingRighttArrow");
+const doneSideLeftArrow = document.querySelector(".doneSideLeftArrow");
+
+const actionFirstCard = document.querySelector(".actionFirstCard");
+const confirmFirstAction = document.querySelector(".confirmFirstAction");
+const cancelFirstAction = document.querySelector(".cancelFirstAction");
+const inputFirstCard = document.querySelector(".inputFirstCard");
+
+// Modal de confirmação de exclusão
+const deleteConfirmModal = document.getElementById("deleteConfirmModal");
+const confirmDelete = document.getElementById("confirmDelete");
+const cancelDelete = document.getElementById("cancelDelete");
+
+let elementToMove = null
+let inputText = '';
+let newCard;
+let editCard;
+let textToMove;
+let sideDivFather;
+let cardToDelete = null;
+
+
+let canAddButton = true
+
+firstTodo.addEventListener("click", () => {
+  if (firstTodo.innerText === "Clique aqui para começar") {
+    actionFirstCard.style.display = "block";
+    input.focus();
+    section.style.opacity = "0.5";
+    canAddButton = true;
+  } else {
+    canAddButton = false;
+  }
+  
+});
+confirmFirstAction.addEventListener("click", () => {
+
+  inputText = inputFirstCard.value.trim();
+
+  if (inputText === "") {
+    preventDefault();
+  }
+
+  firstTodo.innerText = inputText;
+  inputFirstCard.value = "";
+  actionFirstCard.style.display = "none";
+  section.style.opacity = "";
+});
+
+cancelFirstAction.addEventListener('click', () => {
+  inputFirstCard.value = '';
+  actionFirstCard.style.display = 'none'
+  section.style.opacity = ""; 
+})
+
+
+addcard.addEventListener('click', () => {
+  if(firstTodo.innerText === 'Clique aqui para começar') {
+    preventDefault()
+  }
+    prepareNextCard.style.display = "block";
+    section.style.opacity = "0.5";
+    prepareInputValue.focus();  
+})
+
+
+confirm.addEventListener('click', (event) => {
+    
+  
+  inputText = prepareInputValue.value.trim();
+  
+  if (inputText === "") {
+      preventDefault();
+    }
+
+  newCard = toDoCarAndBar.cloneNode(true);
+  newCard.querySelector('.textarea').innerText = inputText;
+    
+  toDoDivFather.append(newCard)
+
+  prepareInputValue.value = "";
+  prepareNextCard.style.display = "none";
+  section.style.opacity = ""; 
+})
+
+
+cancel.addEventListener('click', () => {
+    prepareInputValue.value = "";
+    prepareNextCard.style.display = "none";
+    section.style.opacity = "";  
+})
+
+
+// Funções para o modal de confirmação de exclusão
+function showDeleteConfirmModal(card) {
+  cardToDelete = card;
+  deleteConfirmModal.style.display = "flex";
+  section.style.opacity = "0.5";
+}
+
+function hideDeleteConfirmModal() {
+  deleteConfirmModal.style.display = "none";
+  section.style.opacity = "";
+  cardToDelete = null;
+}
+
+// Event listeners para o modal de exclusão
+confirmDelete.addEventListener("click", () => {
+  if (cardToDelete) {
+    cardToDelete.remove();
+  }
+  hideDeleteConfirmModal();
+});
+
+cancelDelete.addEventListener("click", hideDeleteConfirmModal);
+
+
+
+document.addEventListener("click", (event) => {
+
+  const elementTarget = event.target;
+  const divParent = elementTarget.closest('.card-and-bar');
+
+
+  if (elementTarget.classList.contains("bi-trash")) {
+    event.preventDefault();
+    showDeleteConfirmModal(divParent);
+  }
+
+
+  if (elementTarget.classList.contains('bi-pencil-square')) {
+    section.style.opacity = '0.5'
+    editCard = divParent
+    edit.style.display = 'block'
+
+    let editInput = edit.querySelector('.inputvalor')
+    let copiaBoa = divParent.querySelector('p').innerText
+
+    editInput.value = copiaBoa
+    editInput.focus()
+    
+    
+    editConfirm.addEventListener('click', () => {
+      editCard.querySelector('p').innerText = editInput.value
+      edit.style.display = 'none'
+      section.style.opacity = ''
+    })
+
+    editCancel.addEventListener("click", () => {
+      edit.style.display = "none";
+      section.style.opacity = "";
+    });
+
+  };
+
+  if (elementTarget.classList.contains("bi-arrow-up-circle")) {
+    elementToMove = divParent;
+    sideDivFather = elementToMove.closest(".divFather");
+    sideDivFather.insertBefore(elementToMove, sideDivFather.firstChild);
+  }
+
+
+  if (elementTarget.classList.contains('sideToDoArrow')) {
+    
+    if(firstTodo.innerText === 'Clique aqui para começar') {
+      preventDefault()
+    }
+    doingDivFather.style.display = 'block'
+    textToMove = divParent.querySelector(".textarea").innerText;
+
+    if (firstDoing.innerText.length === 0) {
+      firstDoing.innerText = textToMove;
+    } else {
+      newCard = doingCarAndBar.cloneNode(true);
+      newCard.querySelector(".textarea2").innerText = textToMove;
+
+      doingDivFather.appendChild(newCard);
+    }
+    divParent.remove();
+
+  }
+
+  if (elementTarget.classList.contains("sideDoingLeftArrow")) {
+    textToMove = divParent.querySelector(".textarea2").innerText;
+
+    newCard = toDoCarAndBar.cloneNode(true);
+    newCard.querySelector(".textarea").innerText = textToMove;
+
+    spaceToCard.appendChild(newCard);
+    divParent.remove();
+  }
+
+  if (elementTarget.classList.contains("sideDoingRighttArrow")) {
+    
+    doneDivFather.style.display = 'block'
+    textToMove = divParent.querySelector(".textarea2").innerText;
+
+    if (firstDone.innerText.length === 0) {
+      firstDone.innerText = textToMove;
+    } else {
+      newCard = doneCarAndBar.cloneNode(true);
+      newCard.querySelector(".textarea3").innerText = textToMove;
+
+      doneDivFather.appendChild(newCard);
+    }
+    divParent.remove();
+  }
+
+  if (elementTarget.classList.contains("doneSideLeftArrow")) {
+    textToMove = divParent.querySelector(".textarea3").innerText;
+
+    newCard = doingCarAndBar.cloneNode(true);
+    newCard.querySelector(".textarea2").innerText = textToMove;
+
+    doingDivFather.appendChild(newCard);
+    divParent.remove();
+  }
+})
 
 

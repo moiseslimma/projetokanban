@@ -24,7 +24,7 @@ const doneDivFather = document.querySelector(".doneDivFather");
 const section = document.querySelector('.section')
 const edit = document.querySelector('.edit')
 
-const addcard = document.querySelector('.addcard')
+const addcard = document.querySelector('.addButton')
 const editConfirm = document.querySelector('.editar')
 const cancel = document.querySelector('.cancel')
 const editCancel = document.querySelector('.editCancel')
@@ -41,12 +41,18 @@ const confirmFirstAction = document.querySelector(".confirmFirstAction");
 const cancelFirstAction = document.querySelector(".cancelFirstAction");
 const inputFirstCard = document.querySelector(".inputFirstCard");
 
+// Modal de confirmação de exclusão
+const deleteConfirmModal = document.getElementById("deleteConfirmModal");
+const confirmDelete = document.getElementById("confirmDelete");
+const cancelDelete = document.getElementById("cancelDelete");
+
 let elementToMove = null
 let inputText = '';
 let newCard;
 let editCard;
 let textToMove;
 let sideDivFather;
+let cardToDelete = null;
 
 
 let canAddButton = true
@@ -120,6 +126,28 @@ cancel.addEventListener('click', () => {
 })
 
 
+// Funções para o modal de confirmação de exclusão
+function showDeleteConfirmModal(card) {
+  cardToDelete = card;
+  deleteConfirmModal.style.display = "flex";
+  section.style.opacity = "0.5";
+}
+
+function hideDeleteConfirmModal() {
+  deleteConfirmModal.style.display = "none";
+  section.style.opacity = "";
+  cardToDelete = null;
+}
+
+// Event listeners para o modal de exclusão
+confirmDelete.addEventListener("click", () => {
+  if (cardToDelete) {
+    cardToDelete.remove();
+  }
+  hideDeleteConfirmModal();
+});
+
+cancelDelete.addEventListener("click", hideDeleteConfirmModal);
 
 
 
@@ -129,12 +157,13 @@ document.addEventListener("click", (event) => {
   const divParent = elementTarget.closest('.card-and-bar');
 
 
-  if (elementTarget.classList.contains("bi-trash3")) {
-    divParent.remove();
+  if (elementTarget.classList.contains("bi-trash")) {
+    event.preventDefault();
+    showDeleteConfirmModal(divParent);
   }
 
 
-  if (elementTarget.classList.contains('bi-pencil')) {
+  if (elementTarget.classList.contains('bi-pencil-square')) {
     section.style.opacity = '0.5'
     editCard = divParent
     edit.style.display = 'block'
@@ -159,7 +188,7 @@ document.addEventListener("click", (event) => {
 
   };
 
-  if (elementTarget.classList.contains("bi-arrow-up")) {
+  if (elementTarget.classList.contains("bi-arrow-up-circle")) {
     elementToMove = divParent;
     sideDivFather = elementToMove.closest(".divFather");
     sideDivFather.insertBefore(elementToMove, sideDivFather.firstChild);
